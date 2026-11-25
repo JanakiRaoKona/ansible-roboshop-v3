@@ -1,0 +1,49 @@
+
+- name: disable nginx 
+  command: dnf module disable nginx -y 
+
+- name: install nginx 
+  ansible.builtin.package:
+    name: nginx
+    state: present
+
+- name: start and enable nginx 
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- name: Find all contents inside the directory
+  ansible.builtin.find:
+    paths: /usr/share/nginx/html/
+    recurse: true
+    hidden: true  # Ensures hidden files (.dotfiles) are caught
+    file_type: any
+  register: files_to_delete
+
+- name: print the content in path 
+  debug:
+    msg: "{{ files_to_delete }}"
+
+- name: Remove all found contents
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ files_to_delete.files }}"
+
+- name: Download frontend application 
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/frontend-v4.zip
+    dest: /tmp/frontend.zip
+
+- name:  unzip the file 
+  ansible.builtin.unarchive:
+    src: /tmp/frontend.zip
+    dest: /usr/share/nginx/html
+    remote_src: yes
+
+- name: Copy roboshop service
+  ansible.builtin.template:
+    src: roboshop.conf.j2
+    dest: /etc/nginx/default.d/roboshop.conf 
+

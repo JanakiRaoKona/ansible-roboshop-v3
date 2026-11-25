@@ -1,0 +1,12 @@
+- name:  install python 3.14 & 3.14 pip 
+  dnf: 
+    name: 
+      - python3.14
+      - python3.14-pip
+    state: present
+
+- name: Install bottle into the specified (virtualenv), using Python 3.14
+  ansible.builtin.pip:
+    requirements: /app/requirements.txt
+    virtualenv: /app/.venv
+    virtualenv_command: python3.14 -m venv 

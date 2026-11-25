@@ -1,0 +1,7 @@
+- name:  Configure {{ component }}
+  hosts: "{{ component }}"
+  become: yes
+  roles:
+    - "{{ component }}"
+
+  # roles:  by default it checks in roles folder 
