@@ -14,15 +14,15 @@
 # shipping_db_user: "{{ vault_shipping_db_user }}"
 # shipping_db_password: "{{ vault_shipping_db_password }}"
 
-mongodb_host: mongodb.janakiraodevops.online
-redis_host: redis.janakiraodevops.online  
-mysql_host: mysql.janakiraodevops.online 
-rabbitmq_host: rabbitmq.janakiraodevops.online 
+mongodb_host: mongodb-{{ env }}.janakiraodevops.online
+redis_host: redis-{{ env }}.janakiraodevops.online  
+mysql_host: mysql-{{ env }}.janakiraodevops.online 
+rabbitmq_host: rabbitmq-{{ env }}.janakiraodevops.online 
 
-catalogue_host: catalogue.janakiraodevops.online 
-user_host: user.janakiraodevops.online 
-cart_host: cart.janakiraodevops.online 
-shipping_host: shipping.janakiraodevops.online
-payment_host: payment.janakiraodevops.online
+catalogue_host: catalogue-{{ env }}.janakiraodevops.online 
+user_host: user-{{ env }}.janakiraodevops.online 
+cart_host: cart-{{ env }}.janakiraodevops.online 
+shipping_host: shipping-{{ env }}.janakiraodevops.online
+payment_host: payment-{{ env }}.janakiraodevops.online
 
-frontend_host: frontend.janakiraodevops.online
+frontend_host: frontend-{{ env }}.janakiraodevops.online
