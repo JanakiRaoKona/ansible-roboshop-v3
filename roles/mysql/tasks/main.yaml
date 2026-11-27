@@ -12,7 +12,7 @@
     state: started
     enabled: yes
 
-- name: Install multi python packages with version specifiers
+- name: Install boto3 and botocore with version specifiers
   ansible.builtin.pip:
     name:
       - boto3
